@@ -1,11 +1,11 @@
 import {StyleSheet, SafeAreaView} from 'react-native';
 
-import FeedPost from './src/components/FeedPost';
+import HomeScreen from './src/screens/HomeScreen/HomeScreen';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <FeedPost />
+      <HomeScreen />
     </SafeAreaView>
   );
 }

@@ -47,7 +47,6 @@ export default StyleSheet.create({
   },
   icon: {
     marginHorizontal: 5,
-    color: colors.black,
   },
   bookmarkIcon: {
     marginLeft: 'auto',

@@ -1,4 +1,4 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import styles from './styles';
 
 import Antdesign from 'react-native-vector-icons/AntDesign';
@@ -10,8 +10,16 @@ import colors from '../../theme/colors';
 import {IPost} from '../../lib/types';
 
 import {formatDistance, subDays} from 'date-fns';
+import {useState} from 'react';
 
-export default function Post({post}: {post: IPost}) {
+interface IPostProps {
+  post: IPost;
+}
+
+export default function Post({post}: IPostProps) {
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+
   return (
     <View style={styles.post}>
       <View style={styles.postHeader}>
@@ -42,12 +50,14 @@ export default function Post({post}: {post: IPost}) {
       </View>
       <View style={styles.postFooter}>
         <View style={styles.iconContainer}>
-          <Antdesign
-            name="hearto"
-            size={fonts.size.md}
-            color={colors.text}
-            style={styles.icon}
-          />
+          <Pressable onPress={() => setIsLiked(v => !v)}>
+            <Antdesign
+              name={isLiked ? 'heart' : 'hearto'}
+              size={fonts.size.md}
+              color={isLiked ? colors.accent : colors.text}
+              style={styles.icon}
+            />
+          </Pressable>
           <Ionicons
             name="chatbubble-outline"
             size={fonts.size.md}
@@ -82,11 +92,19 @@ export default function Post({post}: {post: IPost}) {
           </Text>
         </View>
         <View style={styles.captionInfo}>
-          <Text style={styles.text} numberOfLines={3}>
+          <Text
+            style={styles.text}
+            numberOfLines={isDescriptionExpanded ? 0 : 3}
+            ellipsizeMode="tail">
             <Text style={{fontWeight: fonts.weight.bold}}>
               {post.user.username}
             </Text>{' '}
             {post.caption}
+          </Text>
+          <Text
+            style={styles.text}
+            onPress={() => setIsDescriptionExpanded(v => !v)}>
+            {isDescriptionExpanded ? 'less' : 'more'}
           </Text>
         </View>
         <View style={styles.commentsInfo}>

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "user": {
+      "id": "1",
+      "username": "jane_smith",
+      "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1163.jpg"
+    },
+    "image": "https://images.freeimages.com/images/large-previews/5c6/sunset-jungle-1383333.jpg",
+    "time": "2023-12-15T12:00:00Z",
+    "isSeen": false
+  },
+  {
+    "id": "2",
+    "user": {
+      "id": "2",
+      "username": "alex_wilson",
+      "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/69.jpg"
+    },
+    "image": "https://images.freeimages.com/images/large-previews/464/puppy-1400784.jpg?fmt=webp&h=350",
+    "time": "2024-01-09T12:00:00Z",
+    "isSeen": true
+  }
+]

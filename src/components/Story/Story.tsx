@@ -2,7 +2,11 @@ import {Image, View} from 'react-native';
 import styles from './styles';
 import {IStory} from '../../lib/types';
 
-const Story = ({story}: {story: IStory}) => {
+interface IStoryProps {
+  story: IStory;
+}
+
+const Story = ({story}: IStoryProps) => {
   return (
     <View style={styles.container}>
       <Image
