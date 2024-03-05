@@ -20,6 +20,23 @@ export default function Post({post}: IPostProps) {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
+  const toggleDescription = () => {
+    setIsDescriptionExpanded(v => !v);
+  };
+
+  const toggleLike = () => {
+    setIsLiked(v => !v);
+  };
+
+  let lastTap = 0;
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      toggleLike();
+    }
+    lastTap = now;
+  };
+
   return (
     <View style={styles.post}>
       <View style={styles.postHeader}>
@@ -41,12 +58,14 @@ export default function Post({post}: IPostProps) {
         </View>
       </View>
       <View style={styles.postContent}>
-        <Image
-          source={{
-            uri: post.image,
-          }}
-          style={styles.postImage}
-        />
+        <Pressable onPress={handleDoubleTap}>
+          <Image
+            source={{
+              uri: post.image,
+            }}
+            style={styles.postImage}
+          />
+        </Pressable>
       </View>
       <View style={styles.postFooter}>
         <View style={styles.iconContainer}>
@@ -101,9 +120,7 @@ export default function Post({post}: IPostProps) {
             </Text>{' '}
             {post.caption}
           </Text>
-          <Text
-            style={styles.text}
-            onPress={() => setIsDescriptionExpanded(v => !v)}>
+          <Text style={styles.text} onPress={toggleDescription}>
             {isDescriptionExpanded ? 'less' : 'more'}
           </Text>
         </View>
