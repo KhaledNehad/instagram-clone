@@ -1,4 +1,4 @@
-import {View, Text, Image, Pressable} from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 import styles from './styles';
 
 import Antdesign from 'react-native-vector-icons/AntDesign';
@@ -7,16 +7,17 @@ import Feather from 'react-native-vector-icons/Feather';
 import Comment from '../Comment';
 import fonts from '../../theme/fonts';
 import colors from '../../theme/colors';
-import {IPost} from '../../lib/types';
+import { IPost } from '../../lib/types';
 
-import {formatDistance, subDays} from 'date-fns';
-import {useState} from 'react';
+import { formatDistance, subDays } from 'date-fns';
+import { useState } from 'react';
+import DoublePress from '../DoublePressable';
 
 interface IPostProps {
   post: IPost;
 }
 
-export default function Post({post}: IPostProps) {
+export default function Post({ post }: IPostProps) {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -26,15 +27,6 @@ export default function Post({post}: IPostProps) {
 
   const toggleLike = () => {
     setIsLiked(v => !v);
-  };
-
-  let lastTap = 0;
-  const handleDoubleTap = () => {
-    const now = Date.now();
-    if (now - lastTap < 300) {
-      toggleLike();
-    }
-    lastTap = now;
   };
 
   return (
@@ -58,14 +50,14 @@ export default function Post({post}: IPostProps) {
         </View>
       </View>
       <View style={styles.postContent}>
-        <Pressable onPress={handleDoubleTap}>
+        <DoublePress onDoublePress={toggleLike}>
           <Image
             source={{
               uri: post.image,
             }}
             style={styles.postImage}
           />
-        </Pressable>
+        </DoublePress>
       </View>
       <View style={styles.postFooter}>
         <View style={styles.iconContainer}>
@@ -101,11 +93,11 @@ export default function Post({post}: IPostProps) {
         <View style={styles.likesInfo}>
           <Text style={styles.text}>
             Liked by{' '}
-            <Text style={{fontWeight: fonts.weight.bold}}>
+            <Text style={{ fontWeight: fonts.weight.bold }}>
               {post.likes[0].user.username}
             </Text>{' '}
             and{' '}
-            <Text style={{fontWeight: fonts.weight.bold}}>
+            <Text style={{ fontWeight: fonts.weight.bold }}>
               {post.likes.length - 1} others
             </Text>
           </Text>
@@ -115,7 +107,7 @@ export default function Post({post}: IPostProps) {
             style={styles.text}
             numberOfLines={isDescriptionExpanded ? 0 : 3}
             ellipsizeMode="tail">
-            <Text style={{fontWeight: fonts.weight.bold}}>
+            <Text style={{ fontWeight: fonts.weight.bold }}>
               {post.user.username}
             </Text>{' '}
             {post.caption}
